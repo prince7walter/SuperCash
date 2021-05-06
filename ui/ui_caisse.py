@@ -11,10 +11,19 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 #class import
-import Model.Produit as prod
+from PyQt5.QtWidgets import QTableWidgetItem
+from Model.Produit import implProduit
+from Model.Produit import Produit
 
 
 class Ui_MainWindow(object):
+
+    code = []
+    libelle = []
+    quantite = []
+    prix = []
+    total = []
+
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(798, 601)
@@ -150,23 +159,45 @@ class Ui_MainWindow(object):
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
+        self.btAdd.setDisabled(True)
 
         #Action
         self.btCheck.clicked.connect(self.check)
-        self.btAdd.clicked.connect(self.find)
+        self.btAdd.clicked.connect(self.addArt)
         self.btCancelA.clicked.connect(self.cancelArt)
 
 
     def check(self): #verifie si l'article existe
         ref = self.txCode.toPlainText()
-        rs = prod.check(ref)
+        rs = implProduit.check(self,ref)
         if rs:
             self.txCode.setReadOnly(True)
             self.btCheck.setDisabled(True)
-    def find(self):
+            self.btAdd.setDisabled(False)
+
+    def addArt(self):
+        tout=0
         ref = self.txCode.toPlainText()
-        article = prod.find(ref)
-        print(article)
+        lib = implProduit.get(self,ref).lib
+        pu = implProduit.get(self,ref).pu
+        qte = int(self.txQuantite.text())
+        tt = pu*qte
+
+        self.code.append(ref)
+        self.libelle.append(lib)
+        self.prix.append(str(pu))
+        self.quantite.append(str(qte))
+        self.total.append(str(tt))
+
+        for t in self.total:
+            tout = tout + int(t)
+
+        print(self.libelle,self.prix, self.quantite, self.total)
+        self.cancelArt()
+        self.btAdd.setDisabled(True)
+        self.loadData()
+        self.lbTotal.setText(str(tout))
+
 
     def cancelArt(self): #annuler la saisie de l'article courant
         self.txCode.setPlainText("")
@@ -174,6 +205,35 @@ class Ui_MainWindow(object):
         self.txQuantite.setValue(0)
         self.btCheck.setDisabled(False)
         self.btAdd.setDisabled(False)
+
+
+    def loadData(self): #afficher les elements dans le tableau de ventes
+        row0 = 0
+        row1=0
+        row2=0
+        row3=0
+        row4=0
+        #self.tabVente.setRowCount(len(data))
+        for c in self.code:
+            self.tabVente.setItem(row0, 0, QTableWidgetItem(c))
+            row0 = row0 +1
+
+        for l in self.libelle:
+            self.tabVente.setItem(row1, 1, QTableWidgetItem(l))
+            row1 = row1 + 1
+
+        for q in self.quantite:
+            self.tabVente.setItem(row2, 2, QTableWidgetItem(q))
+            row2 = row2 + 1
+
+        for l in self.prix:
+            self.tabVente.setItem(row3, 3, QTableWidgetItem(l))
+            row3 = row3 + 1
+
+        for l in self.total:
+            self.tabVente.setItem(row4, 4, QTableWidgetItem(l))
+            row4 = row4 + 1
+
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate

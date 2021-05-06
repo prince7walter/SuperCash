@@ -7,6 +7,7 @@ db = os.path.join(cur_dir, "supercash")
 cnx = sqlite3.connect(db)
 
 class Produit:
+
     def __init__(self,lib,ref,pu):
         self._lib=lib
         self._ref=ref
@@ -38,28 +39,39 @@ class Produit:
     ref = property(_getref, _setref)
     pu = property(_getpu, _setpu)
 
-def check(ref): #verifie la presence du produit
-    exit = False
-    cnx
-    connect = cnx.cursor()
-    sql = "SELECT * FROM Produit WHERE reference ='"+ ref  +"' "
-    connect.execute(sql)
-    rs = connect.fetchall()
-    connect.close()
+class implProduit:
 
-    if rs :
-        exit = True
-    return exit
+    def __int__(self):
+        pass
 
-def find(ref): #recuperer les informations d'un produit
-    cnx
-    connect = cnx.cursor()
-    sql = "SELECT libelle, Prix_unit FROM Produit WHERE reference ='"+ ref  +"' "
-    connect.execute(sql)
-    rs = connect.fetchall()
-    connect.close()
+    def check(self,ref): #verifie la presence du produit
+        exit = False
+        cnx
+        connect = cnx.cursor()
+        sql = "SELECT * FROM Produit WHERE reference ='"+ ref  +"' "
+        connect.execute(sql)
+        rs = connect.fetchall()
+        connect.close()
 
-    return rs
+        if rs :
+            exit = True
+        return exit
+
+    def get(self,ref):
+        pd = Produit('a',ref,1)
+        cnx
+        connect = cnx.cursor()
+        sql = "SELECT libelle, Prix_unit FROM Produit WHERE reference ='" + ref + "' "
+        connect.execute(sql)
+        rs = connect.fetchall()
+        connect.close()
+
+        for r in rs:
+            pd.pu = r[1]
+            pd.lib = r[0]
+        return pd
+
+
 
 '''
 #try
@@ -69,10 +81,14 @@ print(p1.lib)
 p1.pu = -1
 print(p1.pu)
 '''
-ref= 'laity_sch0'
-ff= check(ref)
-#print(ff)
 
+#ee = Produit()
+ip = implProduit()
 
+ref= 'laity_sch01'
+ff= ip.check(ref)
+print(ff)
 
-
+#pu = ee.findPu('laity_sch01')
+pl = ip.get(ref)
+print(pl.pu, pl.lib, pl.ref)

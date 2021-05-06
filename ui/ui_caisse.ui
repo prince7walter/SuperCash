@@ -473,25 +473,6 @@
     <property name="title">
      <string>Reglement</string>
     </property>
-    <widget class="QPlainTextEdit" name="txCash">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>20</y>
-       <width>111</width>
-       <height>31</height>
-      </rect>
-     </property>
-     <property name="plainText">
-      <string/>
-     </property>
-     <property name="backgroundVisible">
-      <bool>true</bool>
-     </property>
-     <property name="placeholderText">
-      <string>Total Cash</string>
-     </property>
-    </widget>
     <widget class="QPushButton" name="btVisa">
      <property name="geometry">
       <rect>
@@ -503,6 +484,19 @@
      </property>
      <property name="text">
       <string>VISA</string>
+     </property>
+    </widget>
+    <widget class="QSpinBox" name="txCash">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>20</y>
+       <width>101</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
      </property>
     </widget>
    </widget>
