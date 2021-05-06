@@ -14,7 +14,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(798, 549)
+        MainWindow.resize(798, 601)
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap("../../../Images/logomIT.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         MainWindow.setWindowIcon(icon)
@@ -33,7 +33,7 @@ class Ui_MainWindow(object):
         self.btQuitter.setGeometry(QtCore.QRect(620, 20, 131, 81))
         self.btQuitter.setObjectName("btQuitter")
         self.groupBox = QtWidgets.QGroupBox(self.centralwidget)
-        self.groupBox.setGeometry(QtCore.QRect(40, 140, 391, 121))
+        self.groupBox.setGeometry(QtCore.QRect(40, 140, 431, 121))
         self.groupBox.setObjectName("groupBox")
         self.btAdd = QtWidgets.QPushButton(self.groupBox)
         self.btAdd.setGeometry(QtCore.QRect(310, 80, 61, 31))
@@ -56,6 +56,9 @@ class Ui_MainWindow(object):
         self.txQuantite.setGeometry(QtCore.QRect(140, 80, 151, 31))
         self.txQuantite.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.txQuantite.setObjectName("txQuantite")
+        self.btCancelA = QtWidgets.QPushButton(self.groupBox)
+        self.btCancelA.setGeometry(QtCore.QRect(380, 40, 31, 71))
+        self.btCancelA.setObjectName("btCancelA")
         self.groupBox_2 = QtWidgets.QGroupBox(self.centralwidget)
         self.groupBox_2.setGeometry(QtCore.QRect(530, 140, 241, 121))
         self.groupBox_2.setObjectName("groupBox_2")
@@ -84,10 +87,10 @@ class Ui_MainWindow(object):
         self.lbDate.setGeometry(QtCore.QRect(170, 0, 81, 16))
         self.lbDate.setObjectName("lbDate")
         self.groupBox_3 = QtWidgets.QGroupBox(self.centralwidget)
-        self.groupBox_3.setGeometry(QtCore.QRect(40, 280, 541, 261))
+        self.groupBox_3.setGeometry(QtCore.QRect(40, 280, 537, 301))
         self.groupBox_3.setObjectName("groupBox_3")
         self.tabVente = QtWidgets.QTableWidget(self.groupBox_3)
-        self.tabVente.setGeometry(QtCore.QRect(20, 20, 521, 241))
+        self.tabVente.setGeometry(QtCore.QRect(20, 20, 521, 236))
         self.tabVente.setRowCount(7)
         self.tabVente.setObjectName("tabVente")
         self.tabVente.setColumnCount(5)
@@ -101,8 +104,11 @@ class Ui_MainWindow(object):
         self.tabVente.setHorizontalHeaderItem(3, item)
         item = QtWidgets.QTableWidgetItem()
         self.tabVente.setHorizontalHeaderItem(4, item)
+        self.btCancelVt = QtWidgets.QPushButton(self.groupBox_3)
+        self.btCancelVt.setGeometry(QtCore.QRect(29, 260, 501, 28))
+        self.btCancelVt.setObjectName("btCancelVt")
         self.groupBox_4 = QtWidgets.QGroupBox(self.centralwidget)
-        self.groupBox_4.setGeometry(QtCore.QRect(620, 340, 161, 61))
+        self.groupBox_4.setGeometry(QtCore.QRect(590, 360, 181, 61))
         self.groupBox_4.setObjectName("groupBox_4")
         self.lbTotal = QtWidgets.QLabel(self.groupBox_4)
         self.lbTotal.setGeometry(QtCore.QRect(40, 30, 71, 16))
@@ -112,10 +118,10 @@ class Ui_MainWindow(object):
         self.label_11.setGeometry(QtCore.QRect(120, 30, 41, 16))
         self.label_11.setObjectName("label_11")
         self.btValider = QtWidgets.QPushButton(self.centralwidget)
-        self.btValider.setGeometry(QtCore.QRect(640, 490, 131, 51))
+        self.btValider.setGeometry(QtCore.QRect(610, 510, 131, 61))
         self.btValider.setObjectName("btValider")
         self.groupBox_5 = QtWidgets.QGroupBox(self.centralwidget)
-        self.groupBox_5.setGeometry(QtCore.QRect(620, 410, 161, 61))
+        self.groupBox_5.setGeometry(QtCore.QRect(590, 430, 181, 61))
         self.groupBox_5.setObjectName("groupBox_5")
         self.lbRendu = QtWidgets.QLabel(self.groupBox_5)
         self.lbRendu.setGeometry(QtCore.QRect(40, 30, 71, 16))
@@ -126,7 +132,7 @@ class Ui_MainWindow(object):
         self.label_12.setGeometry(QtCore.QRect(120, 30, 41, 16))
         self.label_12.setObjectName("label_12")
         self.groupBox_6 = QtWidgets.QGroupBox(self.centralwidget)
-        self.groupBox_6.setGeometry(QtCore.QRect(620, 280, 171, 61))
+        self.groupBox_6.setGeometry(QtCore.QRect(590, 300, 181, 61))
         self.groupBox_6.setObjectName("groupBox_6")
         self.txCash = QtWidgets.QPlainTextEdit(self.groupBox_6)
         self.txCash.setGeometry(QtCore.QRect(10, 20, 111, 31))
@@ -134,32 +140,12 @@ class Ui_MainWindow(object):
         self.txCash.setBackgroundVisible(True)
         self.txCash.setObjectName("txCash")
         self.btVisa = QtWidgets.QPushButton(self.groupBox_6)
-        self.btVisa.setGeometry(QtCore.QRect(130, 20, 41, 31))
+        self.btVisa.setGeometry(QtCore.QRect(130, 20, 51, 31))
         self.btVisa.setObjectName("btVisa")
         MainWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
-
-
-        #Action
-        self.btCheck.clicked.connect(self.check)
-
-    def check(self):
-        self.txQuantite.setPlainText(self.txCode.toPlainText())
-
-        def setup_default(self):  # Parametreage des boutons
-            a = 1
-            ref = self.txCode.toPlainText()
-            print(ref)
-            # self.btCheck.clicked.connect(self.check(ref))
-
-        # setup_default()
-
-        def check_prod(self, ref):  # Verifier produit
-            a = 1
-            # rs = prod.check(ref)
-            # print(rs)
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
@@ -173,6 +159,7 @@ class Ui_MainWindow(object):
         self.btCheck.setText(_translate("MainWindow", "Check"))
         self.label_2.setText(_translate("MainWindow", "Code article"))
         self.label_3.setText(_translate("MainWindow", "Quantité article"))
+        self.btCancelA.setText(_translate("MainWindow", "-"))
         self.groupBox_2.setTitle(_translate("MainWindow", "Session"))
         self.label.setText(_translate("MainWindow", "numéro Caisse"))
         self.label_4.setText(_translate("MainWindow", "Caissier"))
@@ -192,6 +179,7 @@ class Ui_MainWindow(object):
         item.setText(_translate("MainWindow", "Prix Unitaire"))
         item = self.tabVente.horizontalHeaderItem(4)
         item.setText(_translate("MainWindow", "Total"))
+        self.btCancelVt.setText(_translate("MainWindow", "Annuler"))
         self.groupBox_4.setTitle(_translate("MainWindow", "Total Vente"))
         self.lbTotal.setText(_translate("MainWindow", "0 "))
         self.label_11.setText(_translate("MainWindow", "F CFA"))

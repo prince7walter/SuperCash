@@ -38,7 +38,7 @@ class Produit:
     ref = property(_getref, _setref)
     pu = property(_getpu, _setpu)
 
-def check(ref):  # verifie la presence du produit
+def check(ref): #verifie la presence du produit
     exit = False
     cnx
     connect = cnx.cursor()
@@ -50,6 +50,17 @@ def check(ref):  # verifie la presence du produit
     if rs :
         exit = True
     return exit
+
+def find(ref): #recuperer les informations d'un produit
+    cnx
+    connect = cnx.cursor()
+    sql = "SELECT libelle, Prix_unit FROM Produit WHERE reference ='"+ ref  +"' "
+    connect.execute(sql)
+    rs = connect.fetchall()
+    connect.close()
+
+    return rs
+
 '''
 #try
 p1 = Produit('annas', 'ana1', 12)
